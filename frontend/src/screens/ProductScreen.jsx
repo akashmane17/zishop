@@ -42,7 +42,6 @@ const ProductScreen = () => {
         <Col md={3}>
           <Card>
             <ListGroup>
-
               {/* Price */}
               <ListGroup.Item>
                 <Row>
@@ -58,14 +57,20 @@ const ProductScreen = () => {
                 <Row>
                   <Col>Status:</Col>
                   <Col>
-                    <strong>{product.countInStock > 0 ? 'In Stock' : 'Out Of Stock'}</strong>
+                    <strong>
+                      {product.countInStock > 0 ? "In Stock" : "Out Of Stock"}
+                    </strong>
                   </Col>
                 </Row>
               </ListGroup.Item>
 
               {/* Add to cart */}
               <ListGroup.Item>
-                <Button className="btn-block" type="button" disabled={product.countInStock === '0'}>
+                <Button
+                  className="btn-block"
+                  type="button"
+                  disabled={product.countInStock === "0"}
+                >
                   Add To Cart
                 </Button>
               </ListGroup.Item>

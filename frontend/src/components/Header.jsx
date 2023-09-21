@@ -9,9 +9,8 @@ const Header = () => {
     <header>
       <Navbar bg="dark" variant="dark" expand="md" collapseOnSelect>
         <Container>
-
           {/* Logo */}
-          <LinkContainer to='/'> 
+          <LinkContainer to="/">
             <Navbar.Brand>
               <img src={logo} alt="zishop" />
               Zishop
@@ -23,14 +22,14 @@ const Header = () => {
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="ms-auto">
               {/* Cart */}
-              <LinkContainer to='/cart'>
+              <LinkContainer to="/cart">
                 <Nav.Link>
                   <FaShoppingCart /> Cart
                 </Nav.Link>
               </LinkContainer>
 
               {/* Login */}
-              <LinkContainer to='/login'>
+              <LinkContainer to="/login">
                 <Nav.Link>
                   <FaUser /> Sign In
                 </Nav.Link>

@@ -1,8 +1,8 @@
-import { FaStar, FaStarHalfAlt, FaRegStar } from 'react-icons/fa';
+import { FaStar, FaStarHalfAlt, FaRegStar } from "react-icons/fa";
 
 const Rating = ({ value, text, color }) => {
   return (
-    <div className='rating'>
+    <div className="rating">
       <span>
         {value >= 1 ? (
           <FaStar />
@@ -48,13 +48,9 @@ const Rating = ({ value, text, color }) => {
           <FaRegStar />
         )}
       </span>
-      <span className='rating-text'>{text && text}</span>
+      <span className="rating-text">{text && text}</span>
     </div>
   );
-};
-
-Rating.defaultProps = {
-  color: '#f8e825',
 };
 
 export default Rating;
