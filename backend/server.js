@@ -2,7 +2,10 @@ import dotenv from 'dotenv';
 dotenv.config();
 import express from "express";
 import products from "./data/products.js";
+import connetDB from './config/db.js';
 
+// connect to DB
+connetDB();
 
 const port = process.env.PORT || 5000; 
 
