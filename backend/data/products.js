@@ -1,6 +1,5 @@
 const products = [
   {
-    _id: '1',
     name: 'Airpods Wireless Bluetooth Headphones',
     image: '/images/airpods.jpg',
     description: 'Bluetooth technology lets you connect it with compatible devices wirelessly High-quality AAC audio offers immersive listening experience Built-in microphone allows you to take calls while working',
@@ -12,7 +11,6 @@ const products = [
     numReviews: '12',
   },
   {
-    _id: '2',
     name: 'iPhone 11 Pro 256GB Memory',
     image: '/images/phone.jpg',
     description: 'Introducing the iPhone 11 Pro. A transformative triple-camera system that adds tons of capability without complexity. An unprecedented leap in battery life',
@@ -24,7 +22,6 @@ const products = [
     numReviews: '12',
   },
   {
-    _id: '3',
     name: 'Sony Playstation 5',
     image: '/images/playstation.jpg',
     description: 'The ultimate home entertainment center starts with PlayStation. Whether you are into gaming, HD movies, television, music',
@@ -36,7 +33,6 @@ const products = [
     numReviews: '12',
   },
   {
-    _id: '4',
     name: 'Amazon Echo Dot 3rd Generation',
     image: '/images/alexa.jpg',
     description: 'Meet Echo Dot - Our most popular smart speaker with a fabric design. It is our most compact smart speaker that fits perfectly into small space',
@@ -48,7 +44,6 @@ const products = [
     numReviews: '12',
   },
   {
-    _id: '5',
     name: 'Cannon EOS 80D DSLR Camera',
     image: '/images/camera.jpg',
     description: 'Meet Echo Dot - Our most popular smart speaker with a fabric design. It is our most compact smart speaker that fits perfectly into small space',
@@ -60,7 +55,6 @@ const products = [
     numReviews: '12',
   },
   {
-    _id: '6',
     name: 'Logitech G203 Wired Gaming Mouse',
     image: '/images/mouse.jpg',
     description: 'G203 Lightsync is ready to play with an 8, 000 DPI sensor and customizable, vibrant Lightsync RGB. LIGHTSYNC RGB can be customized with color wave effects or patterns across - 16. 8 million colors to suit your play style, setup, and mood.',
