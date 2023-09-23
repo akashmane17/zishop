@@ -1,5 +1,6 @@
 import asyncHandler from "../middleware//asyncHandler.js";
 import User from "../models/userModel.js";
+import jwt from "jsonwebtoken";
 
 /**
  * @desc Auth user & get token (login)
@@ -7,7 +8,36 @@ import User from "../models/userModel.js";
  * @access Public
  */
 export const authUser = asyncHandler(async (req, res) => {
-  return res.send("Auth User");
+  const { email, password } = req.body;
+
+  const user = await User.findOne({ email });
+  if (!user) {
+    res.status(401);
+    throw new Error("Invalid email or password");
+  }
+
+  const isPasswordMatched = await user.matchPassword(password);
+  if (!isPasswordMatched) {
+    res.status(401);
+    throw new Error("Invalid email or password");
+  }
+
+  const token = jwt.sign({userId: user._id}, process.env.JWT_SECRET, {expiresIn: '1d'});
+
+  //set JWT as HTTP-Only cookie
+  res.cookie('jwt', token, {
+    httpOnly: true,
+    secure: process.env.NODE_ENV !== 'development',
+    sameSite: 'strict',
+    maxAge: 1 * 24 * 60 * 60 * 1000 // 1 day
+  })
+
+  return res.json({
+    _id: user._id,
+    name: user.name,
+    email: user.email,
+    isAdmin: user.isAdmin,
+  });
 });
 
 /**
@@ -46,7 +76,6 @@ export const updateUserProfile = asyncHandler(async (req, res) => {
   return res.send("Update User profile");
 });
 
-
 // -------------------ADMIN--------------------------
 /**
  * @desc Get users
@@ -56,7 +85,6 @@ export const updateUserProfile = asyncHandler(async (req, res) => {
 export const getUsers = asyncHandler(async (req, res) => {
   return res.send("Get Users");
 });
-
 
 /**
  * @desc Get user by ID
