@@ -22,15 +22,17 @@ export const authUser = asyncHandler(async (req, res) => {
     throw new Error("Invalid email or password");
   }
 
-  const token = jwt.sign({userId: user._id}, process.env.JWT_SECRET, {expiresIn: '1d'});
+  const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
+    expiresIn: "1d",
+  });
 
   //set JWT as HTTP-Only cookie
-  res.cookie('jwt', token, {
+  res.cookie("jwt", token, {
     httpOnly: true,
-    secure: process.env.NODE_ENV !== 'development',
-    sameSite: 'strict',
-    maxAge: 1 * 24 * 60 * 60 * 1000 // 1 day
-  })
+    secure: process.env.NODE_ENV !== "development",
+    sameSite: "strict",
+    maxAge: 1 * 24 * 60 * 60 * 1000, // 1 day
+  });
 
   return res.json({
     _id: user._id,
@@ -55,7 +57,12 @@ export const registerUser = asyncHandler(async (req, res) => {
  * @access Private
  */
 export const logoutUser = asyncHandler(async (req, res) => {
-  return res.send("Logout User");
+  res.cookie("jwt", "", {
+    httpOnly: true,
+    expires: new Date(0),
+  });
+
+  res.status(200).json({ message: "Logged out successfully" });
 });
 
 /**
