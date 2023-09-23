@@ -4,7 +4,7 @@ import jwt from "jsonwebtoken";
 
 /**
  * @desc Auth user & get token (login)
- * @route POST /api/users/login
+ * @route POST /api/users/auth
  * @access Public
  */
 export const authUser = asyncHandler(async (req, res) => {
