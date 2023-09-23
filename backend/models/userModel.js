@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { boolean } from "webidl-conversions";
+import bcrypt from "bcryptjs";
 
 const userSchema = new mongoose.Schema(
   {
@@ -24,6 +24,21 @@ const userSchema = new mongoose.Schema(
   },
   { timestamps: true }
 );
+
+// validate password
+userSchema.methods.matchPassword = async function (enteredPassword) {
+  return await bcrypt.compare(enteredPassword, this.password);
+};
+
+// pre method to hash the password
+userSchema.pre("save", async function (next) {
+  if (!this.isModified("password")) {
+    next();
+  }
+
+  const salt = await bcrypt.genSalt(10);
+  this.password = await bcrypt.hash(this.password, salt);
+});
 
 const User = mongoose.model("User", userSchema);
 
