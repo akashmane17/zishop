@@ -1,17 +1,32 @@
+import { useNavigate } from "react-router-dom";
 import { Navbar, Nav, Container, Badge, NavDropdown } from "react-bootstrap";
 import { FaShoppingCart, FaUser } from "react-icons/fa";
 import { LinkContainer } from "react-router-bootstrap";
 import { useSelector } from "react-redux/es/hooks/useSelector";
+import { useLogoutMutation } from "../store/slices/usersApiSlice";
+import { logout } from "../store/slices/authSlice";
 
 import logo from "../assets/z.png";
+import { useDispatch } from "react-redux";
 
 const Header = () => {
   const { cartItems } = useSelector((state) => state.cart);
   const { userInfo } = useSelector((state) => state.auth);
 
-  const logoutHandler = () => {
-    console.log("Logout");
-  }
+  const dispatch = useDispatch  ();
+  const navigate = useNavigate();
+
+  const [logoutApiCall] = useLogoutMutation();
+
+  const logoutHandler = async () => {
+    try {
+      await logoutApiCall().unwrap;
+      dispatch(logout());
+      navigate("/login");
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <header>
@@ -26,7 +41,7 @@ const Header = () => {
                 style={{ width: "35px", marginRight: "5px" }}
               />
               Zishop
-            </Navbar.Brand> 
+            </Navbar.Brand>
           </LinkContainer>
 
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -57,7 +72,7 @@ const Header = () => {
                   </NavDropdown.Item>
                 </NavDropdown>
               ) : (
-                // login 
+                // login
                 <LinkContainer to="/login">
                   <Nav.Link>
                     <FaUser /> Sign In
