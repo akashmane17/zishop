@@ -49,6 +49,7 @@ const PlaceOrderScreen = () => {
     <>
       <CheckoutSteps step1 step2 step3 step4 />
       <Row>
+        {/* Left */}
         <Col md={8}>
           <ListGroup variant='flush'>
             <ListGroup.Item>
@@ -100,6 +101,8 @@ const PlaceOrderScreen = () => {
             </ListGroup.Item>
           </ListGroup>
         </Col>
+
+        {/* Right */}
         <Col md={4}>
           <Card>
             <ListGroup variant='flush'>

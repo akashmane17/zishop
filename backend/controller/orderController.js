@@ -73,7 +73,7 @@ export const updateOrderToDelivered = asyncHandler(async (req, res) => {
 /**
  * @desc get Order By Id
  * @route GET /api/orders/:id
- * @access Private/Admin
+ * @access Private
  */
 export const getOrderById = asyncHandler(async (req, res) => {
   const order = await Order.findById(req.params.id).populate('user', 'name email');
