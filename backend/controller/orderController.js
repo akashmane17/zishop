@@ -113,5 +113,6 @@ export const getOrderById = asyncHandler(async (req, res) => {
  * @access Private/Admin
  */
 export const getOrders = asyncHandler(async (req, res) => {
-  return res.send("Get all orders");
+  const orders = await Order.find({}).populate('user', 'id name');
+  return res.status(200).json(orders);
 });
