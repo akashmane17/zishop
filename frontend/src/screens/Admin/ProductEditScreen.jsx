@@ -8,6 +8,7 @@ import { toast } from "react-toastify";
 import {
   useGetProudctDetailsQuery,
   useUpdateProductMutation,
+  useUploadProductImageMutation,
 } from "../../store/slices/productsApiSlice";
 
 const ProductEditScreen = () => {
@@ -30,6 +31,9 @@ const ProductEditScreen = () => {
 
   const [updateProduct, { isLoading: loadingUpdate }] =
     useUpdateProductMutation();
+
+  const [uploadProductImage, { isLoading: loadingUpload }] =
+    useUploadProductImageMutation();
 
   const navigate = useNavigate();
 
@@ -68,7 +72,17 @@ const ProductEditScreen = () => {
     }
   };
 
-  const uploadFileHandler = () => {};
+  const uploadFileHandler = async (e) => {
+    const formData = new FormData();
+    formData.append("image", e.target.files[0]);
+    try {
+      const res = await uploadProductImage(formData).unwrap();
+      toast.success(res.message);
+      setImage(res.image);
+    } catch (err) {
+      toast.error(err?.data?.message || err.error);
+    }
+  };
 
   return (
     <>
@@ -107,7 +121,7 @@ const ProductEditScreen = () => {
             </Form.Group>
 
             {/* Image */}
-            {/* <Form.Group controlId="image">
+            <Form.Group controlId="image">
               <Form.Label>Image</Form.Label>
               <Form.Control
                 type="text"
@@ -121,7 +135,7 @@ const ProductEditScreen = () => {
                 type="file"
               ></Form.Control>
               {loadingUpload && <Loader />}
-            </Form.Group> */}
+            </Form.Group>
 
             {/* Brand */}
             <Form.Group controlId="brand">
