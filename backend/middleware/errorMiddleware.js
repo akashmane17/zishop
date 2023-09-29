@@ -9,7 +9,6 @@ const errorHandler = (err, req, res, next) => {
   let message = err.message;
 
   // NOTE: checking for invalid ObjectId moved to it's own middleware
-  // See README for further info.
 
   res.status(statusCode).json({
     message: message,
