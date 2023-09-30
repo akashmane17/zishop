@@ -5,6 +5,7 @@ import {
   deleteProduct,
   getProductById,
   getProducts,
+  getTopProducts,
   updateProduct,
 } from "../controller/productController.js";
 import { protect, admin } from "../middleware/authMiddleware.js";
@@ -12,6 +13,8 @@ import { protect, admin } from "../middleware/authMiddleware.js";
 const router = express.Router();
 
 router.get("/", getProducts);
+
+router.get('/top', getTopProducts)
 
 router.get("/:id", getProductById);
 
