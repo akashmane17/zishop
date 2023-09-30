@@ -6,7 +6,7 @@ import Loader from "../../components/Loader";
 import FormContainer from "../../components/FormContainer";
 import { toast } from "react-toastify";
 import {
-  useGetProudctDetailsQuery,
+  useGetProductDetailsQuery,
   useUpdateProductMutation,
   useUploadProductImageMutation,
 } from "../../store/slices/productsApiSlice";
@@ -27,7 +27,7 @@ const ProductEditScreen = () => {
     isLoading,
     refetch,
     error,
-  } = useGetProudctDetailsQuery(productId);
+  } = useGetProductDetailsQuery(productId);
 
   const [updateProduct, { isLoading: loadingUpdate }] =
     useUpdateProductMutation();
@@ -52,7 +52,7 @@ const ProductEditScreen = () => {
   const submitHandler = async (e) => {
     e.preventDefault();
     try {
-      const updatedProduct = {
+      await updateProduct({
         productId,
         name,
         price,
@@ -61,9 +61,8 @@ const ProductEditScreen = () => {
         category,
         description,
         countInStock,
-      };
+      }).unwrap(); // here we need to unwrap the Promise to catch any rejection in our catch block
 
-      const result = await updateProduct(updatedProduct).unwrap(); // here we need to unwrap the Promise to catch any rejection in our catch block
       toast.success("Product updated");
       refetch();
       navigate("/admin/productlist");
