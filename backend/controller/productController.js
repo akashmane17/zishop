@@ -7,9 +7,15 @@ import Product from "../models/productModel.js";
  * @access Public
  */
 export const getProducts = asyncHandler(async (req, res) => {
-  const products = await Product.find({});
-  return res.json(products);
-});
+  const pageSize = 4;
+  const page = Number(req.query.pageNumber) || 1;
+  const count = await Product.countDocuments();
+
+  const products = await Product.find({})
+    .limit(pageSize)
+    .skip(pageSize * (page - 1));
+  return res.json({ products, page, pages: Math.ceil(count / pageSize) });
+}); 
 
 /**
  * @desc Fetch a products
